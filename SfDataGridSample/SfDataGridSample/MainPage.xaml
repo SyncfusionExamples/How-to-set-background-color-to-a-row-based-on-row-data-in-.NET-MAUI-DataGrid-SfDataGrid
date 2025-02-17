@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:SfDataGridSample"
+             x:Class="SfDataGridSample.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:EmployeeViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <local:ColorConverter x:Key="converter" />
+        <Style TargetType="syncfusion:DataGridRow">
+            <Setter Property="Background"
+                    Value="{Binding Source={RelativeSource Mode=Self}, Converter={StaticResource Key=converter}}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <syncfusion:SfDataGrid x:Name="sfGrid" 
+                           GridLinesVisibility="Both"
+                           HeaderGridLinesVisibility="Both"
+                           ColumnWidthMode="Auto"
+                           AutoGenerateColumnsMode="None"
+                           ItemsSource="{Binding Employees}">
+
+        <syncfusion:SfDataGrid.Columns>
+            <syncfusion:DataGridNumericColumn MappingName="EmployeeID"
+                                              Format="#"
+                                              HeaderText="Employee ID" />
+            <syncfusion:DataGridTextColumn MappingName="Name"
+                                           HeaderText="Employee Name" />
+            <syncfusion:DataGridTextColumn MappingName="Title"
+                                           HeaderText="Designation" />
+            <syncfusion:DataGridDateColumn MappingName="HireDate"
+                                           HeaderText="Hire Date" />
+
+        </syncfusion:SfDataGrid.Columns>
+
+    </syncfusion:SfDataGrid>
+</ContentPage>
